@@ -19,11 +19,11 @@ const Homepage = () => {
           className="h-full w-full object-cover"
         />
         <div className="absolute top-4 md:top-8 left-4 md:left-12 flex flex-col">
-          <img
+          {/* <img
             src={amazonlogo}
             alt="Amazon Logo"
             className="mb-2 md:mb-4 w-20 md:w-32"
-          />
+          /> */}
           <div className="text-white ml-2 md:ml-3 text-left md:text-left">
             <span className="block text-lg md:text-[54px] font-semibold leading-tight">
               Bringing

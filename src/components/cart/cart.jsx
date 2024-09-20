@@ -24,8 +24,6 @@ const Cart = () => {
     token
   );
 
-
-
   useEffect(() => {
     if (!loading && data) {
       console.log("All cart items", data);
@@ -134,7 +132,6 @@ const Cart = () => {
     }
   }, [removeCartData, removeCartError]);
 
-
   return (
     <div className="cart px-4 lg:px-40">
       <div className="flex flex-col p-4 sm:p-6">
@@ -221,7 +218,7 @@ const Cart = () => {
           ))}
         </div>
       </div>
-      {/* {/ Total and Checkout Section /} */}
+      {/* Total and Checkout Section  */}
       <div className="flex gap-6 p-4 sm:p-6 md:pt-48">
         <div className="flex flex-col items-center justify-center gap-6 w-full sm:w-1/6 md:w-1/6">
           <div className="lg:px-6 lg:py-4 sm:px-10 sm:py-8 md:px-16 md:py-12 rounded-2xl flex flex-col items-center justify-center w-full">
@@ -245,8 +242,7 @@ const Cart = () => {
           <p className="text-[20px] sm:text-[25px] md:text-[30px] lg:text-[32px] text-[#6CBD44] font-bold leading-tight">
             {cartTotal?.amazonSubTotal}
           </p>
-          <button 
-          className="w-full mt-4 bg-[#6CBD44] sm:px-8 sm:py-2 md:px-8 md:py-2 rounded-full text-white text-[10px] sm:text-[20px] md:text-[22px] font-medium">
+          <button className="w-full mt-4 bg-[#6CBD44] px-3 py-1 rounded-full text-white text-sm sm:text-base md:text-lg lg:text-xl transition-all duration-150">
             Checkout
           </button>
         </div>

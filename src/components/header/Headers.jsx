@@ -25,7 +25,6 @@ const Header = () => {
       console.warn("Search query is empty");
     }
   };
-  
 
   // console.log("headerState",headerState);
 

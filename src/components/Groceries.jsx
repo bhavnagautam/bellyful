@@ -10,27 +10,27 @@ import defaultImage from "../images/assorted-beverage-1.png";
 const Groceries = () => {
   const location = useLocation();
   console.log("location", location);
-  const { category ,categoryName } = location?.state || "house_hold";
-
+  const { category, categoryName } = location?.state || "house_hold";
+ 
   const [subcategories, setSubcategories] = useState([]);
 
   // const [isSubcategory, setIsSubcategory] = useState(false);
 
-  var token = localStorage.getItem("userToken"); 
+  var token = localStorage.getItem("userToken");
 
   const { data, loading, error } = useApi(
-    `${process.env.REACT_APP_GET_CATEGORY_API_URL}?category=${category}`,
+    `${process.env.REACT_APP_GET_CATEGORY_API_URL}?category=${encodeURIComponent(category)}`,
     "GET",
     null,
     token
   );
 
-
   useEffect(() => {
     if (data) {
       console.log("All Subcategories", data);
       if (location.pathname === "/Groceries/category") {
-        const fetchedSubcategories = data.categories[location.state.index]?.sub_categories;
+        const fetchedSubcategories =
+          data.categories[location.state.index]?.sub_categories;
         if (fetchedSubcategories && fetchedSubcategories.length > 0) {
           setSubcategories(fetchedSubcategories);
         }
@@ -74,7 +74,16 @@ const Groceries = () => {
           </div>
         </div>
       </div>
-      <p className="p-4 md:pl-10 md:text-2xl bg-green-100">{category} &gt; {categoryName}</p>
+      {/* <p className="p-4 md:pl-10 md:text-2xl bg-green-100">{category} &gt; {categoryName}</p> */}
+
+      <p className="p-4 md:pl-10 md:text-2xl bg-green-100">
+        {category === "groceries"
+          ? "Grocery"
+          : category === "house_hold"
+          ? "Household Cleaner"
+          : "Other Category"}{" "}
+        &gt; {categoryName}
+      </p>
 
       {/* <div className="flex justify-center md:justify-end p-4">
         <div className="relative w-full max-w-[418px]">
@@ -99,7 +108,7 @@ const Groceries = () => {
               to={subcategory.sub_categories ? "category" : "subcategory"}
               state={{
                 categoryName: subcategory.name,
-                category : category ,
+                category: category,
                 // isSubcategory: isSubcategory,
                 index: index,
               }}
@@ -136,4 +145,3 @@ const Groceries = () => {
 };
 
 export default Groceries;
-

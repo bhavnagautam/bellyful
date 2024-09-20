@@ -123,10 +123,9 @@ import subCategoryBanner from "../../images/sub-category-banner.png";
 import { Link, useLocation } from "react-router-dom";
 import useApi from "../../Customhook/useApi";
 
-
 const SubCategory = () => {
   const location = useLocation();
-  const { categoryName, category} = location.state || {};
+  const { categoryName, category } = location.state || {};
   // const [currentPage, setCurrentPage] = useState(categoryName);
   const [page, setPage] = useState(1);
   const [product, setProduct] = useState([]);
@@ -134,12 +133,11 @@ const SubCategory = () => {
   const [totalPages, setTotalPages] = useState(1); // State to store the total number of pages
 
   var token = localStorage.getItem("userToken");
-
   const { data, loading, error } = useApi(
     location.pathname === "/Groceries/category/subcategory" ||
       location.state.isSubcategory
-      ? `${process.env.REACT_APP_GET_PRODUCT_BY_SUBCATEGORY}?sub_category_name=${categoryName}&page=${page}&limit=${limit}`
-      : `${process.env.REACT_APP_GET_PRODUCT_BY_CATEGORY}?category_name=${categoryName}&page=${page}&limit=${limit}`,
+      ? `${process.env.REACT_APP_GET_PRODUCT_BY_SUBCATEGORY}?sub_category_name=${encodeURIComponent(categoryName)}&page=${page}&limit=${limit}`
+      : `${process.env.REACT_APP_GET_PRODUCT_BY_CATEGORY}?category_name=${encodeURIComponent(categoryName)}&page=${page}&limit=${limit}`,
     "GET",
     null,
     token
@@ -177,9 +175,14 @@ const SubCategory = () => {
             className="w-[190px] sm:w-[300px] md:w-[400px] lg:w-[550px] h-auto object-contain"
           />
         </div>
-      </div>
+      </div> 
       <p className="p-4 md:pl-10 md:text-2xl bg-green-100">
-        {category} &gt; {categoryName} 
+        {category === "groceries"
+          ? "Grocery"
+          : category === "house_hold"
+          ? "Household Cleaner"
+          : "other category"}{" "}
+        &gt; {categoryName}
       </p>
 
       <div className="flex justify-center p-4 sm:p-4 md:mx-10 sm:mx-4 md:p-4 mt-10 md:mt-20">
@@ -228,7 +231,7 @@ const SubCategory = () => {
           &lt;
         </button>
         <span className="px-4 py-2 mx-2 bg-white text-gray-700 rounded-lg">
-           {page} to {totalPages}
+          {page} to {totalPages}
         </span>
         <button
           onClick={() => handlePageChange(page + 1)}
