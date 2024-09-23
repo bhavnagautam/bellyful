@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+@media (min-width: 640px) and (max-width: 1300px) {
+  .custom-responsive {
+    width: 20%; /* Example for width control */
+    padding: 20px; /* Adjust padding */
+    font-size: 18px; /* Modify font size */
+  }
+}

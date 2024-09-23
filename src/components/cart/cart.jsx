@@ -235,7 +235,7 @@ const Cart = () => {
           </div>
         </div>
 
-        <div className="shadow-lg px-3 py-3 lg:px-2 sm:px-10 sm:py-8 md:px-12 md:py-8 rounded-2xl flex flex-col items-center bg-[#F1FFE3] w-full h-full sm:w-1/6 md:w-1/6">
+        <div className="shadow-lg px-3 py-3 lg:px-2 sm:px-10 sm:py-8 md:px-12 md:py-8 rounded-2xl flex flex-col items-center bg-[#F1FFE3] w-full h-full sm:w-1/6 md:w-1/6 custom-responsive">
           <p className="text-[18px] md:text-[24px] text-gray-800 font-medium leading-tight">
             AED
           </p>
@@ -247,19 +247,20 @@ const Cart = () => {
           </button>
         </div>
 
-        <div className="shadow-lg px-3 py-3 lg:px-2  sm:px-10 sm:py-8 md:px-12 md:py-8 rounded-2xl flex flex-col items-center bg-white w-full h-full sm:w-1/6 md:w-1/6">
+        <div className="shadow-lg px-3 py-3 lg:px-2 sm:px-10 sm:py-8 md:px-12 md:py-8 rounded-2xl flex flex-col items-center bg-white w-full h-full sm:w-1/6 md:w-1/6 custom-responsive">
           <p className="text-[18px] md:text-[24px] text-gray-800 font-medium leading-tight">
             AED
           </p>
           <p className="text-[20px] sm:text-[25px] md:text-[30px] lg:text-[32px] text-[#6CBD44] font-bold leading-tight">
-            {cartTotal?.carrefourSubTotal}
+            {cartTotal?.amazonSubTotal}
           </p>
-          <button className="w-full mt-4 bg-[#6CBD44] sm:px-8 sm:py-2 md:px-8 md:py-2 rounded-full text-white text-[10px] sm:text-[20px] md:text-[22px] font-medium">
+          <button className="w-full mt-4 bg-[#6CBD44] px-3 py-1 rounded-full text-white text-sm sm:text-base md:text-lg lg:text-xl transition-all duration-150">
             Checkout
           </button>
         </div>
       </div>
     </div>
+
   );
 };
 

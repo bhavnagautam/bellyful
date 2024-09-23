@@ -10,7 +10,7 @@ import defaultImage from "../images/assorted-beverage-1.png";
 const Groceries = () => {
   const location = useLocation();
   console.log("location", location);
-  const { category, categoryName } = location?.state || "house_hold";
+  const { category, categoryName ,categoryNames } = location?.state || "house_hold";
  
   const [subcategories, setSubcategories] = useState([]);
 
@@ -107,6 +107,7 @@ const Groceries = () => {
             <Link
               to={subcategory.sub_categories ? "category" : "subcategory"}
               state={{
+                // categoryNames:categoryName,
                 categoryName: subcategory.name,
                 category: category,
                 // isSubcategory: isSubcategory,

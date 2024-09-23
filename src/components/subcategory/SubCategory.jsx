@@ -120,14 +120,19 @@
 import React, { useState, useEffect } from "react";
 import subCategoryBannerBg from "../../images/sub-category-banner-bg.png";
 import subCategoryBanner from "../../images/sub-category-banner.png";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useApi from "../../Customhook/useApi";
 
 const SubCategory = () => {
   const location = useLocation();
-  const { categoryName, category } = location.state || {};
-  // const [currentPage, setCurrentPage] = useState(categoryName);
-  const [page, setPage] = useState(1);
+  const navigate = useNavigate();
+  const { categoryName, category ,categoryNames } = location.state || {};
+
+// Extract the page from URL query parameters
+const searchParams = new URLSearchParams(location.search);
+const initialPage = parseInt(searchParams.get("page")) || 1; 
+
+  const [page, setPage] = useState(initialPage);
   const [product, setProduct] = useState([]);
   const [limit] = useState(12);
   const [totalPages, setTotalPages] = useState(1); // State to store the total number of pages
@@ -157,6 +162,7 @@ const SubCategory = () => {
   const handlePageChange = (newPage) => {
     if (newPage > 0 && newPage <= totalPages) {
       setPage(newPage);
+      navigate(`${location.pathname}?page=${newPage}`, { state: location.state });
     }
   };
 
@@ -182,7 +188,7 @@ const SubCategory = () => {
           : category === "house_hold"
           ? "Household Cleaner"
           : "other category"}{" "}
-        &gt; {categoryName}
+         &gt; {categoryName}
       </p>
 
       <div className="flex justify-center p-4 sm:p-4 md:mx-10 sm:mx-4 md:p-4 mt-10 md:mt-20">
