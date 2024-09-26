@@ -180,7 +180,7 @@ const Header = () => {
                   placeholder="Enter product name"
                   value={query}
                   className="p-2 pl-10 pr-14 border text-black sm:text-black border-gray-300 w-full h-8 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  onChange={(e) => setQuery(e.target.value)}
+                  onChange={(e) => setQuery(e.target.value)} 
                 />
                 <button
                   type="submit"

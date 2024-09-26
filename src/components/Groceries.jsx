@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import useApi from "../Customhook/useApi";
 import backgrountblue from "../images/empty-studio-blue.png";
 import pngitem from "../images/Pngitem.png";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Link, useLocation } from "react-router-dom";
 import defaultImage from "../images/assorted-beverage-1.png";
+import { CircularProgress, Backdrop } from "@mui/material";
 
 const Groceries = () => {
   const location = useLocation();
@@ -84,7 +84,6 @@ const Groceries = () => {
           : "Other Category"}{" "}
         &gt; {categoryName}
       </p>
-
       {/* <div className="flex justify-center md:justify-end p-4">
         <div className="relative w-full max-w-[418px]">
           <input
@@ -103,42 +102,45 @@ const Groceries = () => {
           className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 w-full"
           style={{ gap: "30px" }}
         >
-          {subcategories?.map((subcategory, index) => (
-            <Link
-              to={subcategory.sub_categories ? "category" : "subcategory"}
-              state={{
-                // categoryNames:categoryName,
-                categoryName: subcategory.name,
-                category: category,
-                // isSubcategory: isSubcategory,
-                index: index,
-              }}
-              onClick={() => {
-                if (subcategory.sub_categories) {
-                  setSubcategories(subcategory.sub_categories);
-                  // setIsSubcategory(true);
-                }
-              }}
-              key={index}
-            >
-              <div className="bg-[#F2FFE6] w-full h-[170px]  sm:h-[250px]  rounded-lg flex flex-col justify-between items-center p-4 shadow-custom">
-                <p className="text-center font-bold text-xs sm:text-sm md:text-md lg:text-lg line-clamp-2 mb-4">
-                  {subcategory.name}
-                </p>
-                <div className=" w-[100px] h-[100px] sm:w-[160px] sm:h-[160px] md:w-[198px] md:h-[166px] object-fit ">
-                  <img
-                    src={
-                      subcategory.image_url
-                        ? subcategory.image_url
-                        : defaultImage
-                    }
-                    alt={subcategory.name}
-                    className=" w-full h-full "
-                  />
+          {subcategories.length > 0 ? (
+            subcategories.map((subcategory, index) => (
+              <Link
+                to={subcategory.sub_categories ? "category" : "subcategory"}
+                state={{
+                  categoryName: subcategory.name,
+                  category: category,
+                  index: index,
+                }}
+                onClick={() => {
+                  if (subcategory.sub_categories) {
+                    setSubcategories(subcategory.sub_categories);
+                  }
+                }}
+                key={index}
+              >
+                <div className="bg-[#F2FFE6] w-full h-[170px]  sm:h-[250px]  rounded-lg flex flex-col justify-between items-center p-4 shadow-custom">
+                  <p className="text-center font-bold text-xs sm:text-sm md:text-md lg:text-lg line-clamp-2 mb-4">{subcategory.name}</p>
+                  <div className=" w-[85px] h-[85px] sm:w-[160px] sm:h-[160px] md:w-[198px] md:h-[166px] object-fit ">
+                    <img
+                      src={subcategory.image_url ? subcategory.image_url : defaultImage}
+                      alt={subcategory.name}
+                      className=" w-full h-full "
+                    />
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))
+          ) : (
+            <Backdrop
+              sx={(theme) => ({
+                color: "#fff",
+                zIndex: theme.zIndex.drawer + 1,
+              })}
+              open={loading}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
+          )}
         </div>
       </div>
     </>

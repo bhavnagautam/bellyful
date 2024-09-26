@@ -143,6 +143,7 @@ import useApi from "../../Customhook/useApi";
 import DehazeIcon from "@mui/icons-material/Dehaze";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Link, useNavigate } from "react-router-dom";
+import { CircularProgress, Backdrop } from "@mui/material";
 
 const AllCategoryDropdown = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -284,7 +285,18 @@ const AllCategoryDropdown = () => {
           onMouseLeave={!isMobileView ? handleMouseLeave : undefined}
         >
           <ul>
-            {filteredCategories?.map((category, index) => (
+            {loading ? (
+            <Backdrop
+              sx={(theme) => ({
+                color: "#fff",
+                zIndex: theme.zIndex.drawer + 1,
+              })}
+              open={loading}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
+          ) :
+            filteredCategories?.map((category, index) => (
               <li
                 key={index}
                 className="group relative cursor-pointer py-1 px-2 hover:bg-gray-100"

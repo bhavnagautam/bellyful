@@ -5,12 +5,6 @@ function useApi(url, method = 'GET', body = null ,token = null) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // console.log("url",url);
-  // console.log("method",method)
-  // console.log("body",body)
-  // console.log("token",token)
-
-
   useEffect(() => {
     if (!url) return; 
     fetchData();

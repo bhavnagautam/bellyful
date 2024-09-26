@@ -7,6 +7,7 @@ import carreFourLogo from "../../images/Carrefour_logo.png";
 import removeCartImage from "../../images/RemoveCart.png";
 import useApi from "../../Customhook/useApi";
 import { useAppContext } from "../../context/AppContext";
+import { CircularProgress, Backdrop } from "@mui/material";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -155,7 +156,18 @@ const Cart = () => {
           </div>
         </div>
         <div className="overflow-auto max-h-[calc(100vh-300px)] p-4 sm:p-10  ">
-          {cartItems?.map((items, index) => (
+          {loading ? (
+            <Backdrop
+              sx={(theme) => ({
+                color: "#fff",
+                zIndex: theme.zIndex.drawer + 1,
+              })}
+              open={loading}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
+          ) :
+          cartItems?.map((items, index) => (
             <div className="flex gap-6 mt-8 md:mt-14" key={index}>
               {/* {/ Product Section /} */}
               <div className="relative shadow-md p-2 lg:p-4 sm:p-1 rounded-2xl flex flex-col items-center justify-center w-[125px] md:w-1/6 sm:w-1/3">
@@ -252,7 +264,7 @@ const Cart = () => {
             AED
           </p>
           <p className="text-[20px] sm:text-[25px] md:text-[30px] lg:text-[32px] text-[#6CBD44] font-bold leading-tight">
-            {cartTotal?.amazonSubTotal}
+            {cartTotal?.carrefourSubTotal}
           </p>
           <button className="w-full mt-4 bg-[#6CBD44] px-3 py-1 rounded-full text-white text-sm sm:text-base md:text-lg lg:text-xl transition-all duration-150">
             Checkout

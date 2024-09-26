@@ -100,7 +100,7 @@ const Login = ({ toggleForm, setModalOpen }) => {
     } else if (data?.status === true) {
       // API returned success
       setErrors({});
-      console.log("Login successful:", data);
+      console.log("Login successful");
       localStorage.setItem("userToken", data.items.token);
       localStorage.setItem("userId", data.items.userId);
       alert("Login Successfully");

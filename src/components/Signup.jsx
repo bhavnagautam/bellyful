@@ -182,6 +182,7 @@ const Signup = ({ toggleForm }) => {
       e.preventDefault();
     }
   };
+
   useEffect(() => {
     console.log("API Response:", data);
     // Rest of the code...
@@ -216,10 +217,7 @@ const Signup = ({ toggleForm }) => {
     fetchCountryData();
   }, []);
 
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({ ...formData, [name]: value });
-  // };
+
   const handleInputChange = (e) => {
     if (e?.target) {
       // For regular input fields
@@ -231,9 +229,6 @@ const Signup = ({ toggleForm }) => {
     }
   };
 
-  // const handleCountryCodeChange = (e) => {
-  //   setFormData({ ...formData, countryCode: e.target.value });
-  // };
 
   const validateForm = () => {
     const errors = {};

@@ -127,11 +127,19 @@ import subCategoryBannerBg from "../../images/sub-category-banner-bg.png";
 import subCategoryBanner from "../../images/sub-category-banner.png";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import { CircularProgress, Backdrop } from "@mui/material";
 
 const SearchCategoryName = () => {
   const { search } = useLocation();
-  const { products, categoryName, page, limit, totalProducts, handleSearch } =
-    useContext(SearchContext);
+  const {
+    products,
+    categoryName,
+    page,
+    limit,
+    totalProducts,
+    handleSearch,
+    loading,
+  } = useContext(SearchContext);
 
   // Extract search parameters from URL
   const params = new URLSearchParams(search);
@@ -169,7 +177,17 @@ const SearchCategoryName = () => {
           className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 w-full"
           style={{ gap: "30px" }}
         >
-          {products.length > 0 ? (
+          {loading ? (
+            <Backdrop
+              sx={(theme) => ({
+                color: "#fff",
+                zIndex: theme.zIndex.drawer + 1,
+              })}
+              open={loading}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
+          ) : products.length > 0 ? (
             products.map((product, index) => (
               <Link
                 to="ProductDescription"
@@ -180,7 +198,7 @@ const SearchCategoryName = () => {
                   <img
                     src={product.image_path}
                     alt={product.name}
-                    className="w-[85px] h-[100px] sm:w-[100px] sm:h[120px] md:w-[140px] lg:w-[100px] object-fit mb-4"
+                    className="w-[85px] h-[100px] sm:w-[100px] sm:h[120px] md:w-[140px] lg:w-[100px] object-contain mb-4"
                   />
                   <div className="flex flex-col items-start text-left sm:text-left w-full">
                     <p className="text-green-600 font-semibold text-sm sm:text-base">
@@ -198,7 +216,7 @@ const SearchCategoryName = () => {
           )}
         </div>
       </div>
-      
+
       {/* for pagination */}
       <div className="flex justify-center m-4">
         <Stack spacing={2}>
