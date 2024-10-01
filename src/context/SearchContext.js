@@ -13,6 +13,7 @@ export const SearchProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [totalProducts, setTotalProducts] = useState(0);
   const [categoryName, setCategoryName] = useState("");
+  const [noProductsFound, setNoProductsFound] = useState(false);
   const [triggerSearch, setTriggerSearch] = useState(false);
   const token = localStorage.getItem("userToken");
   const [loading, setLoading] = useState(true);
@@ -52,7 +53,7 @@ export const SearchProvider = ({ children }) => {
         setProducts(data.items.products);
         setTotalProducts(data.items.totalProducts); // Set total products for pagination
         setCategoryName(data.items.products[0]?.category || "Data is not available");
-
+        setNoProductsFound(data.items.products.length === 0);
         // Check if we need to navigate back to homepage
         const totalPages = Math.ceil(data.items.totalProducts / searchLimit);
         if (searchPage > totalPages) {
@@ -65,6 +66,7 @@ export const SearchProvider = ({ children }) => {
           }
         }
       } else {
+        setNoProductsFound(true);
         console.warn("No products found or invalid data structure", data);
       }
     } catch (error) {
@@ -103,7 +105,8 @@ export const SearchProvider = ({ children }) => {
     triggerSearch,
     handleSearch,
     loading,
-    setLoading
+    setLoading,
+    noProductsFound
   };
 
   return (

@@ -15,7 +15,8 @@ const Header = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const token = localStorage.getItem("userToken"); // Get values from context
   const { headerState } = useAppContext();
-  const { query, setQuery, handleSearch } = useContext(SearchContext);
+  const { query, setQuery, handleSearch, noProductsFound } =
+    useContext(SearchContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -180,7 +181,7 @@ const Header = () => {
                   placeholder="Enter product name"
                   value={query}
                   className="p-2 pl-10 pr-14 border text-black sm:text-black border-gray-300 w-full h-8 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  onChange={(e) => setQuery(e.target.value)} 
+                  onChange={(e) => setQuery(e.target.value)}
                 />
                 <button
                   type="submit"
@@ -191,6 +192,11 @@ const Header = () => {
                   </span>
                 </button>
               </form>
+              {noProductsFound && (
+                <p className="text-grey-500 text-sm mt-2">
+                  No products found
+                </p>
+              )}
             </div>
 
             <ul className="flex space-x-8 items-center">
